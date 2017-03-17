@@ -1,0 +1,22 @@
+{
+  "bindings": [
+    {
+      "type": "httpTrigger",
+      "name": "req",
+      "authLevel": "function",
+      "methods": [
+        "post"
+      ],
+      "direction": "in",
+      "route": "RegisterNewCar/{country}/{plate}"
+    },
+    {
+      "type": "table",
+      "name": "outputTable",
+      "tableName": "carregistrations",
+      "connection": "carnotify_STORAGE",
+      "direction": "out"
+    }
+  ],
+  "disabled": false
+}

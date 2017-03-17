@@ -1,0 +1,34 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "route": "notifyjs/{country}/{plate}/{messageid}"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "$return"
+    },
+    {
+      "type": "table",
+      "name": "registerTable",
+      "tableName": "carregistrations",
+      "partitionKey": "{country}",
+      "rowKey": "{plate}",
+      "take": 1,
+      "connection": "AzureWebJobsDashboard",
+      "direction": "in"
+    },
+    {
+      "type": "queue",
+      "name": "outputQueueItem",
+      "queueName": "notify",
+      "connection": "AzureWebJobsDashboard",
+      "direction": "out"
+    }
+  ],
+  "disabled": false
+}

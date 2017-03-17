@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="carnotify.RegisterCarPage"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:ext="clr-namespace:carnotify.Extensions;assembly=carnotify"
+             xmlns:ctrl="clr-namespace:carnotify.Controls;assembly=carnotify"
+             xmlns:conv="clr-namespace:carnotify.Converters;assembly=carnotify"
+             prism:ViewModelLocator.AutowireViewModel="True">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:BoolInverter x:Key="Inverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <ctrl:CarImage IsDriving="{Binding IsLoading}" Source="{ext:ImageResource carnotify.logocar.png}" Grid.Column="1" Grid.Row="0" />
+            <Image Source="{ext:ImageResource carnotify.logofont.png}" Grid.Column="1" Grid.Row="1" />
+        </Grid>
+        <Label Text="Choose your country" Grid.Row="2" />
+        <Picker IsEnabled="{Binding IsLoading, Converter={StaticResource Inverter}}" ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry}" Grid.Row="3" />
+        <Label Text="Enter your plate" Grid.Row="4" />
+        <Entry IsEnabled="{Binding IsLoading, Converter={StaticResource Inverter}}" Keyboard="Default" Text="{Binding SelectedPlate}" Grid.Row="5" />
+        <Button Text="Register" Command="{Binding RegisterCommand}" Grid.Row="6" />
+    </Grid>
+</ContentPage>

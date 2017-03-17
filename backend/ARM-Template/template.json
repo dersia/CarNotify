@@ -1,0 +1,111 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "databaseAccounts_carnotify_name": {
+            "defaultValue": null,
+            "type": "SecureString"
+        },
+        "databaseAccounts_carnotify_name_resource_name": {
+            "defaultValue": null,
+            "type": "String"
+        },
+        "namespaces_carnotify_name": {
+            "defaultValue": null,
+            "type": "String"
+        },
+        "storageAccounts_carnotify_name": {
+            "defaultValue": null,
+            "type": "String"
+        },
+        "sites_carnotify_name": {
+            "defaultValue": null,
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.DocumentDB/databaseAccounts",
+            "kind": "GlobalDocumentDB",
+            "name": "[parameters('databaseAccounts_carnotify_name_resource_name')]",
+            "apiVersion": "2015-04-08",
+            "location": "West Europe",
+            "tags": {},
+            "properties": {
+                "databaseAccountOfferType": "Standard",
+                "consistencyPolicy": {
+                    "defaultConsistencyLevel": "Session",
+                    "maxIntervalInSeconds": 5,
+                    "maxStalenessPrefix": 100
+                },
+                "name": "[parameters('databaseAccounts_carnotify_name')]"
+            },
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.NotificationHubs/namespaces",
+            "sku": {
+                "name": "Standard"
+            },
+            "kind": "NotificationHub",
+            "name": "[parameters('namespaces_carnotify_name')]",
+            "apiVersion": "2014-09-01",
+            "location": "West Europe",
+            "tags": {},
+            "properties": {
+                "namespaceType": "NotificationHub"
+            },
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_carnotify_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "westeurope",
+            "tags": {},
+            "properties": {},
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "kind": "functionapp",
+            "name": "[parameters('sites_carnotify_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "West Europe",
+            "properties": {
+                "name": "[parameters('sites_carnotify_name')]",
+                "hostNames": [
+                    "[concat(parameters('sites_carnotify_name'),'.azurewebsites.net')]"
+                ],
+                "enabledHostNames": [
+                    "[concat(parameters('sites_carnotify_name'),'.azurewebsites.net')]",
+                    "[concat(parameters('sites_carnotify_name'),'.scm.azurewebsites.net')]"
+                ],
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_carnotify_name'),'.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    },
+                    {
+                        "name": "[concat(parameters('sites_carnotify_name'),'.scm.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_WestEuropePlan_name'))]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_WestEuropePlan_name'))]"
+            ]
+        }
+    ]
+}

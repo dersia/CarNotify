@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:carnotify"
+             x:Class="carnotify.MainPage">
+    <local:RegisterCarPage x:Name="registerCarPage" Title="Register Car"></local:RegisterCarPage>
+    <local:NotifyCarPage x:Name="notifyCarPage" Title="Notify Car"></local:NotifyCarPage>
+</TabbedPage>

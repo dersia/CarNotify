@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="carnotify.NotifyCarPage"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:ext="clr-namespace:carnotify.Extensions;assembly=carnotify"
+             xmlns:ctrl="clr-namespace:carnotify.Controls;assembly=carnotify"
+             xmlns:conv="clr-namespace:carnotify.Converters;assembly=carnotify"
+             prism:ViewModelLocator.AutowireViewModel="True">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="PhotoButton" TargetType="Button" BaseResourceKey="ButtonStyle">
+                <Setter Property="Margin" Value="1,0,20,0" />
+                <Setter Property="BackgroundColor" Value="#ecf0f1" />
+            </Style>
+            <Style x:Key="RegistrationEntry" TargetType="Entry" BaseResourceKey="EntryStyle">
+                <Setter Property="Margin" Value="20,0,0,0" />
+            </Style>
+            <conv:BoolInverter x:Key="Inverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <ctrl:CarImage IsDriving="{Binding IsLoading}" Source="{ext:ImageResource carnotify.logocar.png}" Grid.Column="1" Grid.Row="0" />
+            <Image Source="{ext:ImageResource carnotify.logofont.png}" Grid.Column="1" Grid.Row="1" />
+        </Grid>
+        <Label Text="Choose the car's country" Grid.Row="2" />
+        <Picker IsEnabled="{Binding IsLoading, Converter={StaticResource Inverter}}" ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry}" Grid.Row="3" />
+        <Label Text="Car's Plate" Grid.Row="4" />
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Entry IsEnabled="{Binding IsLoading, Converter={StaticResource Inverter}}" Text="{Binding SelectedPlate}" Grid.Column="0" Style="{DynamicResource RegistrationEntry}" />
+            <Button IsEnabled="{Binding IsLoading, Converter={StaticResource Inverter}}" Command="{Binding TakePictureCommand}" Image="iconcamera.png" Grid.Column="1" Style="{DynamicResource PhotoButton}" />
+        </Grid>
+        <Button Command="{Binding NotifyCommand}" Text="Notify" Grid.Row="6" />
+    </Grid>
+</ContentPage>

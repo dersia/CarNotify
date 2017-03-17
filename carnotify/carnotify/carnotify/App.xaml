@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms"
+             x:Class="carnotify.App">
+    <prism:PrismApplication.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="LabelFont" x:TypeArguments="Font" iOS="Futura, None, Large" Android="Futura, None, Large" WinPhone="Futura, None, Large" />
+            <OnPlatform x:Key="EntryFontSize" x:TypeArguments="x:Double" iOS="18" Android="18" WinPhone="30" />
+            <OnPlatform x:Key="ControlHeight" x:TypeArguments="x:Double" iOS="50" Android="50" WinPhone="60" />
+            <OnPlatform x:Key="EntryTextColour" x:TypeArguments="Color" iOS="Black" Android="White" WinPhone="Black" />
+            <Thickness x:Key="SidePadding" Left="20" Top="0" Right="20" Bottom="0" />
+            <Style TargetType="Image" ApplyToDerivedTypes="true">
+                <Setter Property="Margin" Value="20,0,20,0" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="Font" Value="{DynamicResource LabelFont}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="Margin" Value="{StaticResource SidePadding}" />
+            </Style>
+            <Style TargetType="ContentPage" ApplyToDerivedTypes="true">
+                <Setter Property="BackgroundColor" Value="#313131" />
+            </Style>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#6dde92" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="Margin" Value="{StaticResource SidePadding}" />
+                <Setter Property="HeightRequest" Value="{DynamicResource ControlHeight}" />
+            </Style>
+            <Style BaseResourceKey="ButtonStyle" TargetType="Button">
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="Margin" Value="{StaticResource SidePadding}" />
+                <Setter Property="HeightRequest" Value="{DynamicResource ControlHeight}" />
+                <Setter Property="TextColor" Value="{DynamicResource EntryTextColour}" />
+            </Style>
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="Margin" Value="{StaticResource SidePadding}" />
+                <Setter Property="HeightRequest" Value="{DynamicResource ControlHeight}" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="{DynamicResource EntryTextColour}" />
+                <Setter Property="FontSize" Value="{DynamicResource EntryFontSize}" />
+            </Style>
+            <Style BaseResourceKey="EntryStyle" TargetType="Entry">
+            </Style>
+        </ResourceDictionary>
+    </prism:PrismApplication.Resources>
+</prism:PrismApplication>
