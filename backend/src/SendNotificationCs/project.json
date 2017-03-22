@@ -1,0 +1,11 @@
+{
+  "frameworks": {
+    "net46":{
+      "dependencies": {
+        "Microsoft.Azure.WebJobs.Extensions": "2.0.0",
+        "Microsoft.Azure.WebJobs.Extensions.NotificationHubs": "1.0.0",
+        "Microsoft.Azure.NotificationHubs": "1.0.7"
+      }
+    }
+   }
+}
