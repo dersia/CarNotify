@@ -1,4 +1,6 @@
 #r "Newtonsoft.Json"
+#r "Microsoft.Azure.WebJobs.Extensions.NotificationHubs"
+#r "Microsoft.Azure.NotificationHubs"
 using System;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
